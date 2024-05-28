@@ -6,14 +6,15 @@ Cultural and data structures
 Control Structures and Data Structures, oh my!
 
 Today:
-- If Statements
-- Comparison Operations
-- Boolean Logic
-- For Loops
-- While Loops
+- [x] If Statements
+- [x] Comparison Operations
+- [x] Boolean Logic
+- [x] For Loops
+- [x] While Loops
 
 This Afternoon
 - Arrays
 - Dictionaries
 - String Splitting and Joining
+
 
