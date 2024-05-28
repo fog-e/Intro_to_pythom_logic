@@ -28,46 +28,44 @@ dinner_rolls_recipe = {
     "butter": 0.1  # kg
 }
 
-def calculate_unit_cost(recipe, ingredient_cost):
+def calculate_total_cost(recipe, ingredient_costs):
     total_cost = 0
     for ingredient, amount in recipe.items():
         if ingredient != "recipe_name":
-            ingredient_cost_value = ingredient_cost.get(ingredient, 0)
-            total_cost += ingredient_cost_value * amount
+            ingredient_cost = ingredient_costs.get(ingredient, 0)
+            total_cost += ingredient_cost * amount
+    print(f"Total cost to make {recipe['recipe_name']}: ${total_cost:.2f}")
     return total_cost
 
-def change_price(ingredient_cost, ingredient_name, percentage):
-    if ingredient_name in ingredient_cost:
-        ingredient_cost[ingredient_name] += ingredient_cost[ingredient_name] * percentage
+def change_price(ingredient_costs, ingredient_name, change_percent):
+    ingredient_costs[ingredient_name] = ingredient_costs.get(ingredient_name, 0) * (1 + change_percent)
 
-def change_all_prices(ingredient_cost, percentage):
-    new_costs = ingredient_cost.copy()
+def change_all_prices(ingredient_costs, change_percent):
+    new_costs = ingredient_costs.copy()
     for ingredient in new_costs:
-        change_price(new_costs, ingredient, percentage)
+        change_price(new_costs, ingredient, change_percent)
     return new_costs
 
-def random_fluctuations(ingredient_cost, max_rise, max_fall):
-    new_costs = ingredient_cost.copy()
+def random_fluctuations(ingredient_costs, max_rise, max_fall):
+    new_costs = ingredient_costs.copy()
     for ingredient in new_costs:
-        fluctuation = random.uniform(max_fall, max_rise)
-        change_price(new_costs, ingredient, fluctuation)
+        change_percent = random.uniform(max_fall, max_rise)
+        change_price(new_costs, ingredient, change_percent)
     return new_costs
 
 def simulate_recipe_costs(recipe, ingredient_costs):
-    base_cost = calculate_unit_cost(recipe, ingredient_costs)
+    base_cost = calculate_total_cost(recipe, ingredient_costs)
     min_cost = base_cost
     max_cost = base_cost
-
     for _ in range(10000):  # run 10,000 simulations
         current_simulation = random_fluctuations(ingredient_costs, 0.05, -0.05)
         for _ in range(20):  # for 20 "turns"
             current_simulation = random_fluctuations(current_simulation, 0.05, -0.05)
-            current_cost = calculate_unit_cost(recipe, current_simulation)
+            current_cost = calculate_total_cost(recipe, current_simulation)
             if current_cost > max_cost:
                 max_cost = current_cost
             if current_cost < min_cost:
                 min_cost = current_cost
-
     return {
         "recipe_name": recipe["recipe_name"],
         "starting_cost": base_cost,
@@ -76,7 +74,7 @@ def simulate_recipe_costs(recipe, ingredient_costs):
     }
 
 # Running the simulation for the dinner rolls recipe
-total_cost = calculate_unit_cost(dinner_rolls_recipe, ingredient_costs)
+total_cost = calculate_total_cost(dinner_rolls_recipe, ingredient_costs)
 print(f"Total cost to make {dinner_rolls_recipe['recipe_name']}: ${total_cost:.2f}")
 
 # Example of running the simulation for every recipe
