@@ -1,4 +1,4 @@
-# omtro_to_pythom_logic
+# Intro_to_pythom_logic
 Cultural and data structures
 
 # intro_to_python_logic
