@@ -11,20 +11,11 @@ for key, value in pets.items():
 
 # User dictionary with nested customer details
 user = {
-    "username": "FogTheDeveloper",
+    "username": "Fog",
     "email": "fog@whatever.com",
-    "title": "IT CEO",
+    "title": "IT",
     "customer_details": {
-        "Client": "Multiverse",
+        "Client": "nope",
         "last_login": "May 23"
     }
 }
-
-# Update the user's title
-user["title"] = "CTO"
-
-# Print the client detail from the nested dictionary
-print(user["customer_details"]["Client"])
-
-# Print the entire user dictionary
-print(user)

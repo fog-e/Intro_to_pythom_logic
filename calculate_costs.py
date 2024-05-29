@@ -35,7 +35,8 @@ def calculate_total_cost(recipe, ingredient_costs):
         if not ingredient == "recipe_name":
             ingredient_cost = ingredient_costs.get(ingredient, 0)
             total_cost += (ingredient_cost * amount)
-    print(f"Total cost to make {recipe_name}: ${total_cost:.2f}")
+    # Commenting out the print statement to reduce excessive output
+    # print(f"Total cost to make {recipe_name}: ${total_cost:.2f}")
     return total_cost
 
 def change_price(ingredient_costs, ingredient_name, change_percent):
